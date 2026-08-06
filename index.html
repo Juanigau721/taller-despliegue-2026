@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obligatorio Programación 1</title>
+    <script src="postulante.js"></script>
+    <script src="admin.js"></script>
+    <script src="ofertaLaboral.js"></script>
+    <script src="postulacion.js"></script>
+    <script src="sistema.js"></script>
+    <script src="codigo.js" defer></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div id="contenedor">
+
+<header>
+    <h1>Cartelera de Postulaciones</h1>
+    <p>Sistema de gestión de ofertas laborales</p>
+</header>
+
+<main>
+
+<section id="inicio">
+    <div class="tarjetaInicio">
+        <h2>Bienvenido</h2>
+        <p>Seleccioná el tipo de usuario para ingresar al sistema.</p>
+
+        <div class="botonesInicio">
+            <input type="button" id="btnVistaPostulante" value="Postulante">
+            <input type="button" id="btnVistaAdmin" value="Administrador">
+        </div>
+    </div>
+</section>
+
+<section id="seccionPostulante" class="panelUsuario">
+
+<input type="button" id="btnVolverPostulante" class="btnVolver" value="← Volver al inicio">
+
+<h2>Panel del Postulante</h2>
+
+<div class="tarjeta">
+<h3>Registro de Postulante</h3>
+
+<form>
+    <label for="txtNombreCompleto">Nombre completo:</label>
+    <input type="text" id="txtNombreCompleto">
+    <br><br>
+
+    <label for="txtUsuarioRegistro">Nombre de usuario:</label>
+    <input type="text" id="txtUsuarioRegistro">
+    <br><br>
+
+    <label for="txtContraseniaRegistro">Contraseña:</label>
+    <input type="password" id="txtContraseniaRegistro">
+    <br><br>
+
+    <label for="slcCategoria">Categoría:</label>
+    <select id="slcCategoria">
+        <option value="#">Seleccione una opción</option>
+        <option value="Junior">Junior</option>
+        <option value="Semi-Senior">Semi-Senior</option>
+        <option value="Senior">Senior</option>
+    </select>
+    <br><br>
+
+    <label for="slcArea">Área:</label>
+    <select id="slcArea">
+        <option value="#">Seleccione una opción</option>
+        <option value="Tecnología">Tecnología</option>
+        <option value="Diseño">Diseño</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Administración">Administración</option>
+        <option value="Otros">Otros</option>
+    </select>
+    <br><br>
+
+    <input type="button" id="btnRegistro" value="Registrarse">
+    <br><br>
+</form>
+
+<p id="pMensajeRegistro"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Ingreso de Postulante</h3>
+
+<form>
+    <label for="txtUsuarioLoginPost">Usuario:</label>
+    <input type="text" id="txtUsuarioLoginPost">
+    <br><br>
+
+    <label for="txtPassLoginPost">Contraseña:</label>
+    <input type="password" id="txtPassLoginPost">
+    <br><br>
+
+    <input type="button" id="btnLoginPost" value="Ingresar">
+    <br><br>
+</form>
+
+<p id="pMsgLoginPost"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Cerrar Sesión - Postulante</h3>
+
+<input type="button" id="btnCerrarSesionPost" value="Cerrar sesión">
+
+<p id="pCerrarSesionPost"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Ofertas Laborales Disponibles</h3>
+
+<label for="slcFiltroArea">Filtrar por área:</label>
+<select id="slcFiltroArea">
+    <option value="Interes">Mi área de interés</option>
+    <option value="Todas">Todas las áreas</option>
+</select>
+
+<br><br>
+
+<table border="1" id="tablaOfertasDisponibles" style="display:none">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Empresa</th>
+            <th>Nivel</th>
+            <th>Área</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody id="tblOfertasDisponibles"></tbody>
+</table>
+
+<br>
+
+<input type="button" id="btnVerTodas" value="Ver todas las ofertas">
+
+<p id="pOfertasDisponibles"></p>
+
+
+<p id="pPostulacion"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Mis Postulaciones</h3>
+
+<table border="1" id="tablaMisPostulaciones" style="display:none">
+    <thead>
+        <tr>
+            <th>Oferta</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody id="tblMisPostulaciones"></tbody>
+</table>
+
+<br>
+
+<input type="button" id="btnVerMisPostulaciones" value="Ver mis postulaciones">
+
+<p id="pMisPostulaciones"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Ofertas Destacadas</h3>
+
+<input type="button" id="btnVerOfertasDestacadas" value="Ver ofertas destacadas">
+
+<br><br>
+
+<table border="1" id="tablaOfertasDestacadas" style="display:none">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Empresa</th>
+            <th>Nivel</th>
+            <th>Descripción</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody id="tblOfertasDestacadas"></tbody>
+</table>
+
+<p id="pOfertaDestacada"></p>
+</div>
+
+</section>
+
+<section id="seccionAdministrador" class="panelUsuario">
+
+<input type="button" id="btnVolverAdmin" class="btnVolver" value="← Volver al inicio">
+
+<h2>Panel del Administrador</h2>
+
+<div class="tarjeta">
+<h3>Ingreso de Administrador</h3>
+
+<form>
+    <label for="txtUsuarioAdmin">Usuario:</label>
+    <input type="text" id="txtUsuarioAdmin">
+    <br><br>
+
+    <label for="txtPassAdmin">Contraseña:</label>
+    <input type="password" id="txtPassAdmin">
+    <br><br>
+
+    <input type="button" id="btnLoginAdmin" value="Ingresar">
+</form>
+
+<p id="pLoginAdmin"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Cerrar Sesión Administrador</h3>
+
+<input type="button" id="btnCerrarSesionAdmin" value="Cerrar sesión">
+
+<p id="pCerrarSesionAdmin"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Crear Oferta Laboral</h3>
+
+<form>
+    <label for="txtTituloOferta">Título:</label>
+    <input type="text" id="txtTituloOferta">
+    <br><br>
+
+    <label for="txtEmpresaOferta">Empresa:</label>
+    <input type="text" id="txtEmpresaOferta">
+    <br><br>
+
+    <label for="txtDescripcionOferta">Descripción:</label>
+    <input type="text" id="txtDescripcionOferta">
+    <br><br>
+
+    <label for="slcNivelOferta">Nivel requerido:</label>
+    <select id="slcNivelOferta">
+        <option value="#">Seleccione</option>
+        <option value="Junior">Junior</option>
+        <option value="Semi-Senior">Semi-Senior</option>
+        <option value="Senior">Senior</option>
+    </select>
+    <br><br>
+
+    <label for="slcAreaOferta">Área:</label>
+    <select id="slcAreaOferta">
+        <option value="#">Seleccione</option>
+        <option value="Tecnología">Tecnología</option>
+        <option value="Diseño">Diseño</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Administración">Administración</option>
+        <option value="Otros">Otros</option>
+    </select>
+    <br><br>
+
+    <label for="txtLimitePost">Límite de postulaciones:</label>
+    <input type="text" id="txtLimitePost">
+    <br><br>
+
+    <label for="txtVacantes">Vacantes:</label>
+    <input type="text" id="txtVacantes">
+    <br><br>
+
+    <label for="slcDestacada">Oferta destacada:</label>
+    <select id="slcDestacada">
+        <option value="#">Seleccione</option>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+    </select>
+    <br><br>
+
+    <input type="button" id="btnCrearOferta" value="Crear oferta">
+</form>
+
+<p id="pCrearOferta"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Listado de Ofertas</h3>
+
+<table border="1" id="tablaListadoOfertas" style="display:none">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Empresa</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody id="tblListadoOfertas"></tbody>
+</table>
+
+<br>
+
+<input type="button" id="btnVerListadoOfertas" value="Ver listado de ofertas">
+
+<p id="pListadoOfertas"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Editar Oferta Laboral</h3>
+
+<label for="slcEditarOferta">Seleccionar oferta:</label>
+<select id="slcEditarOferta">
+    <option value="#">Seleccione una oferta</option>
+</select>
+
+<br><br>
+
+<label for="txtEditarTitulo">Nuevo título:</label>
+<input type="text" id="txtEditarTitulo">
+
+<br><br>
+
+<label for="txtEditarDescripcion">Nueva descripción:</label>
+<input type="text" id="txtEditarDescripcion">
+
+<br><br>
+
+<label for="slcEditarNivel">Nuevo nivel requerido:</label>
+<select id="slcEditarNivel">
+    <option value="#">Seleccione</option>
+    <option value="Junior">Junior</option>
+    <option value="Semi-Senior">Semi-Senior</option>
+    <option value="Senior">Senior</option>
+</select>
+
+<br><br>
+
+<label for="slcEditarArea">Nueva área:</label>
+<select id="slcEditarArea">
+    <option value="#">Seleccione</option>
+    <option value="Tecnología">Tecnología</option>
+    <option value="Diseño">Diseño</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Administración">Administración</option>
+    <option value="Otros">Otros</option>
+</select>
+
+<br><br>
+
+<label for="txtEditarLimitePost">Nuevo límite de postulaciones:</label>
+<input type="text" id="txtEditarLimitePost">
+
+<br><br>
+
+<label for="txtEditarVacantes">Nuevas vacantes:</label>
+<input type="text" id="txtEditarVacantes">
+
+<br><br>
+
+<label for="slcEditarDestacada">Oferta destacada:</label>
+<select id="slcEditarDestacada">
+    <option value="#">Seleccione</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
+</select>
+
+<br><br>
+
+<input type="button" id="btnEditarOferta" value="Guardar cambios">
+
+<p id="pEditarOferta"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Cerrar Oferta Laboral</h3>
+
+<label for="slcCerrarOferta">Oferta:</label>
+<select id="slcCerrarOferta">
+    <option value="#">Seleccione una oferta</option>
+</select>
+
+<br><br>
+
+<input type="button" id="btnCerrarOferta" value="Cerrar oferta">
+
+<p id="pCerrarOferta"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Postulaciones Pendientes</h3>
+
+<table border="1" id="tablaPostulacionesPendientes" style="display:none">
+    <thead>
+        <tr>
+            <th>Postulante</th>
+            <th>Oferta</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody id="tblPostulacionesPendientes"></tbody>
+</table>
+
+<br>
+
+<input type="button" id="btnVerPostulacionesPendientes" value="Ver postulaciones pendientes">
+
+<p id="pPostulacionesPendientes"></p>
+
+<p id="pProcesarPost"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Estadísticas Generales</h3>
+
+<table border="1" id="tablaEstadisticas" style="display:none">
+    <thead>
+        <tr>
+            <th>Oferta</th>
+            <th>Pendientes</th>
+            <th>Aceptadas</th>
+            <th>Rechazadas</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="tblEstadisticas"></tbody>
+</table>
+
+<br>
+
+<input type="button" id="btnVerEstadisticas" value="Ver estadísticas">
+
+<p id="pTotalActivas"></p>
+<p id="pTotalInactivas"></p>
+<p id="pTotalCerradas"></p>
+<p id="pPorcentajeVacantes"></p>
+<p id="pPostulanteMasPostulaciones"></p>
+</div>
+
+<div class="tarjeta">
+<h3>Buscar Oferta en Estadísticas</h3>
+
+<label for="txtBuscarOferta">Título:</label>
+<input type="text" id="txtBuscarOferta">
+
+<br><br>
+
+<input type="button" id="btnBuscarOferta" value="Buscar">
+
+<p id="pBuscarOferta"></p>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+    <p>Juan Gauthier - 369241 - N1A</p>
+</footer>
+
+</div>
+
+</body>
+</html>
